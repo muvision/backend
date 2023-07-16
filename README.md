@@ -3,6 +3,9 @@
 
 Copy in ensemble_model.h5 to the mysite/muvision directory
 
-Run these in terminal.
-1. $ pip install requirements.txt
-2. $ python manage.py runserver
+Run these commands in the terminal.
+```console
+pip install -r requirements.txt
+cd mysite
+python manage.py runserver
+```
