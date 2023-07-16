@@ -2,3 +2,4 @@ scikit-image
 tensorflow
 numpy
 Pillow
+Django
