@@ -6,3 +6,4 @@ Django
 pylatex
 pdflatex
 folium==0.2.1
+django-cors-headers
