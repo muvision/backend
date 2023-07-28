@@ -7,3 +7,8 @@ pylatex
 pdflatex
 folium==0.2.1
 django-cors-headers
+matplotlib
+cv2
+pandas
+opencv-python
+ipython
