@@ -7,7 +7,7 @@ from definitions import ROOT_DIR
 
 
 def classify(np_image):
-    ensemble_model_path = os.path.join(ROOT_DIR, 'mysite', 'muvision', 'ensemble_model.h5')
+    ensemble_model_path = os.path.join(ROOT_DIR, 'mysite', 'muvision', 'custom_model.h5')
     ensemble_model = tf.keras.models.load_model(ensemble_model_path)
     image_size = (45, 45)
     # np_image = Image.open(filename)
