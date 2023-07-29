@@ -140,5 +140,5 @@ def resize(img, width, height, background_colour):
         new_img = cv2.copyMakeBorder(img, to_add, to_add, 0, 0, borderType=cv2.BORDER_CONSTANT,
                                      value=(
                                      int(background_colour[0]), int(background_colour[1]), int(background_colour[2])))
-    resized = cv2.resize(new_img, (width, height), interpolation=cv2.INTER_AREA)
+    resized = cv2.resize(new_img, (max_size, max_size), interpolation=cv2.INTER_AREA)
     return resized

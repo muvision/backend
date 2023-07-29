@@ -4,6 +4,7 @@ import pandas as pd
 import border_crop as bc
 import extract_characters as ec
 import special_characters as sc
+import identify_characters as ic
 from IPython.display import display
 
 
@@ -30,7 +31,7 @@ def image_reader(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
     cropped_image = cv2.erode(cropped_image, kernel, iterations=1)
 
-    cv2.imshow("window", cropped_image)
+    #cv2.imshow("window", cropped_image)
     # Cropping the borders by 1% if case any there was unclean cropping of image
     height_diff = int(cropped_image.shape[0] * 0.01)
     width_diff = int(cropped_image.shape[1] * 0.01)
@@ -38,7 +39,7 @@ def image_reader(image):
     cropped_image = cropped_image[height_diff:cropped_image.shape[0] - height_diff,
                     width_diff:cropped_image.shape[1] - width_diff]
 
-    cv2.imshow("window", cropped_image)
+    #cv2.imshow("window", cropped_image)
 
     dilation, inverted_dilation = bc.prepare_image(cropped_image, (100, 5))
 
@@ -68,7 +69,7 @@ def image_reader(image):
 
     for i in range(len(boxcoords.index)):
         img_shape = boxcoords['image'].iloc[i].shape
-        cv2.imshow("window", boxcoords['image'].iloc[i])
+        #cv2.imshow("window", boxcoords['image'].iloc[i])
         line_images = []
         single_bounding_box = []
         (line_images, single_bounding_box) = ec.identify_letter(boxcoords['image'].iloc[i], line_images,
@@ -94,7 +95,7 @@ def image_reader(image):
             median_y = []
 
             for i in range(len(line_coords)):
-                cv2.imshow("window", line_coords.iloc[i, 4])
+                #cv2.imshow("window", line_coords.iloc[i, 4])
                 median_y.append((line_coords['y'].iloc[i] + line_coords['y1'].iloc[i]) / 2)
             line_coords['median_y'] = median_y
             line_info.append(line_coords)
@@ -105,8 +106,13 @@ def image_reader(image):
 
         display(line_info[i])
 
+    document = ic.identify_lines(line_info)
+
+    print(document)
+
+    return document
     # Call
 
 
-#img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/multiline.png')
-#image_reader(img)
+img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/multiline.png')
+image_reader(img)

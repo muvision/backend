@@ -1,12 +1,11 @@
 import numpy as np
-
+import classification
 
 # Determining Subscripts and superscripts
 
+
 def determine_special_functions(df):
     std = np.std(df['median_y'])
-    y1mean = np.average(df['y1'])
-    ymean = np.average(df['y'])
     median_mean = np.average(df['median_y'])
 
     spec_list = []
@@ -22,5 +21,12 @@ def determine_special_functions(df):
     return spec_list
 
 
-def determine_equal():
-    print("temp")
+def determine_equal(i, df, avg_x):
+    if i + 1 < len(df.index):
+        cur_median = (df['x1'].iloc[i] - df['x'].iloc[i])/2
+        next_median = (df['x1'].iloc[i+1] - df['x'].iloc[i+1])/2
+        next_symbol = classification.classify(df['image'].iloc[i + 1])
+        #and abs(next_median - cur_median) < avg_x
+        if next_symbol == '-':
+            return True
+    return False
