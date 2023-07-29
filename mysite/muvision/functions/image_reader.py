@@ -6,6 +6,8 @@ import extract_characters as ec
 import special_characters as sc
 import identify_characters as ic
 from IPython.display import display
+import latex
+import classification
 
 
 def common_color(img):
@@ -114,5 +116,9 @@ def image_reader(image):
     # Call
 
 
-img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/multiline.png')
-image_reader(img)
+# img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/daa6ccaa-5a64-4a61-99b9-87ab1dd34ec31.jpg')
+# lines = image_reader(img)
+#
+# latex.write_latex(lines)
+#
+# # print(classification.classify(img))

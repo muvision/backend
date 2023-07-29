@@ -4,11 +4,11 @@ import numpy as np
 
 
 def identify_lines(line_info):
-    document = ""
+    document = []
     for df in line_info:
         avg_x = (np.average(df['x'].diff()) + np.average(df['x1'].diff()))/2
         line_string = classify_characters(df, avg_x)
-        document = document + line_string + "\\\\"
+        document.append(line_string)
     return document
 
 
