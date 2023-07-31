@@ -1,5 +1,5 @@
-import classification
-import special_characters as sc
+from . import classification
+from . import special_characters as sc
 import numpy as np
 
 

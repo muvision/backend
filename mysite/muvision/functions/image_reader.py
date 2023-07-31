@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
 import pandas as pd
-import border_crop as bc
-import extract_characters as ec
-import special_characters as sc
-import identify_characters as ic
+from . import border_crop as bc
+from . import extract_characters as ec
+from . import special_characters as sc
+from . import identify_characters as ic
 from IPython.display import display
-import latex
-import classification
+from . import latex
+from . import classification
 
 
 def common_color(img):

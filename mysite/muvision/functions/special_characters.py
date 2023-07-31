@@ -1,5 +1,5 @@
 import numpy as np
-import classification
+from . import classification
 
 # Determining Subscripts and superscripts
 

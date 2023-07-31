@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import border_crop as bc
+from . import border_crop as bc
 
 
 # Extracting Contours

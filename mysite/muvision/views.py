@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from PIL import Image
-from functions.image_reader import image_reader
-from .functions import classification
+from .functions.image_reader import image_reader
+from .functions.classification import classify
 
 
 def index(request):
