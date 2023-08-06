@@ -10,8 +10,8 @@ from . import latex
 from . import classification
 
 
-def common_color(img):
-    unq, count = np.unique(img.reshape(-1, 3), axis=0, return_counts=True)
+def common_color(_img):
+    unq, count = np.unique(_img.reshape(-1, 3), axis=0, return_counts=True)
     back_color = [0, 0, 0]
     back_color[0], back_color[1], back_color[2] = unq[np.argmax(count)]
 
@@ -19,6 +19,7 @@ def common_color(img):
 
 
 def image_reader(image):
+    image = np.asarray(image)
     cropped_image = bc.prepare_crop(image)
 
     cropped_image = bc.binarize_img(cropped_image)
@@ -116,8 +117,8 @@ def image_reader(image):
     # Call
 
 
-# img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/daa6ccaa-5a64-4a61-99b9-87ab1dd34ec31.jpg')
-# lines = image_reader(img)
+#img = cv2.imread('C:/Users/Richard/Pictures/Muvision Images/daa6ccaa-5a64-4a61-99b9-87ab1dd34ec31.jpg')
+#lines = image_reader(img)
 #
 # latex.write_latex(lines)
 #
