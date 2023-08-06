@@ -3,7 +3,6 @@ import numpy as np
 
 
 def prepare_image(image, dimension_size):
-    cv2.imwrite("passed", image)
     img_gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     img_th = cv2.GaussianBlur(img_gray, (5, 5), 0)
 

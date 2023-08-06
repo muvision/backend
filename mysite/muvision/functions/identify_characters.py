@@ -4,11 +4,15 @@ import numpy as np
 
 
 def identify_lines(line_info):
-    document = ""
-    for df in line_info:
-        avg_x = (np.average(df['x'].diff()) + np.average(df['x1'].diff()))/2
-        line_string = classify_characters(df, avg_x)
+    document = "\\begin{align*} "
+    for i in range(len(line_info)):
+        avg_x = (np.average(line_info[i]['x'].diff()) + np.average(line_info[i]['x1'].diff()))/2
+        line_string = classify_characters(line_info[i], avg_x)
         document = document + line_string
+
+        if i != len(line_info) - 1:
+            document = document + " \\\\ "
+    document = document + " \\end{align*}"
     return document
 
 
@@ -25,8 +29,11 @@ def classify_characters(df, avg_x):
         res = classification.classify(image)
 
         if res == '-' and sc.determine_equal(i, df, avg_x):
-            line_string, is_script = fix_subscripts(line_string, df, is_script, i)
-            line_string = line_string + "="
+
+            if is_script == "reg":
+                line_string = line_string + " &= "
+            else:
+                line_string = line_string + " = "
             is_equal = True
         else:
             line_string, is_script = fix_subscripts(line_string, df, is_script, i)
@@ -34,8 +41,6 @@ def classify_characters(df, avg_x):
 
     if is_script != 'reg':
         line_string = line_string + "}"
-
-    line_string = line_string + " \\\\ "
 
     return line_string
 
