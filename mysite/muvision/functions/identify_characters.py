@@ -1,6 +1,8 @@
 from . import classification
 from . import special_characters as sc
 import numpy as np
+import os
+import tensorflow as tf
 
 
 def identify_lines(line_info):
@@ -20,13 +22,15 @@ def classify_characters(df, avg_x):
     line_string = ""
     is_equal = False
     is_script = "reg"
+    custom_model_path = os.path.join(os.getcwd(), 'muvision', 'custom_model2.h5')
+    custom_model = tf.keras.models.load_model(custom_model_path)
 
     for i in range(len(df.index)):
         if is_equal:
             is_equal = False
             continue
         image = df['image'].iloc[i]
-        res = classification.classify(image)
+        res = classification.classify(image, custom_model)
 
         if res == '-' and sc.determine_equal(i, df, avg_x):
 
