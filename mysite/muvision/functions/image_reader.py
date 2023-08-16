@@ -34,15 +34,12 @@ def image_reader(image):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
     cropped_image = cv2.erode(cropped_image, kernel, iterations=1)
 
-    #cv2.imshow("window", cropped_image)
     # Cropping the borders by 1% if case any there was unclean cropping of image
     height_diff = int(cropped_image.shape[0] * 0.01)
     width_diff = int(cropped_image.shape[1] * 0.01)
 
     cropped_image = cropped_image[height_diff:cropped_image.shape[0] - height_diff,
                     width_diff:cropped_image.shape[1] - width_diff]
-
-    #cv2.imshow("window", cropped_image)
 
     dilation, inverted_dilation = bc.prepare_image(cropped_image, (100, 5))
 
@@ -72,7 +69,6 @@ def image_reader(image):
 
     for i in range(len(boxcoords.index)):
         img_shape = boxcoords['image'].iloc[i].shape
-        #cv2.imshow("window", boxcoords['image'].iloc[i])
         line_images = []
         single_bounding_box = []
         (line_images, single_bounding_box) = ec.identify_letter(boxcoords['image'].iloc[i], line_images,
@@ -96,11 +92,13 @@ def image_reader(image):
             line_coords = line_coords.drop(columns=['level_0', 'index'])
 
             median_y = []
+            area = []
 
             for i in range(len(line_coords)):
-                #cv2.imshow("window", line_coords.iloc[i, 4])
                 median_y.append((line_coords['y'].iloc[i] + line_coords['y1'].iloc[i]) / 2)
+                area.append(abs(line_coords['y'].iloc[i] - line_coords['y1'].iloc[i]) * abs(line_coords['x'].iloc[i] - line_coords['x1'].iloc[i]))
             line_coords['median_y'] = median_y
+            line_coords['area'] = area
             line_info.append(line_coords)
 
     for i in range(len(line_info)):
