@@ -102,8 +102,14 @@ def image_reader(image):
             line_info.append(line_coords)
 
     for i in range(len(line_info)):
-        type_list = sc.determine_special_functions(line_info[i])
+        std = np.std(line_info[i]['median_y'])
+        median_mean = np.average(line_info[i]['median_y'])
+        type_list = sc.determine_special_functions(line_info[i], std, median_mean)
         line_info[i]['character type'] = type_list
+
+        # Used for equal signs and division
+        line_info[i]['std'] = std
+        line_info[i]['median_mean'] = median_mean
 
         display(line_info[i])
 

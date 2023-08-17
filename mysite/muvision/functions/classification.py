@@ -15,7 +15,7 @@ def classify(np_image, model):
     np_image = np.array(np_image).astype('float32') / 256
     np_image = transform.resize(np_image, (45, 45,3))
     np_image = np.expand_dims(np_image, axis=0)
-    
+
     prediction = model.predict(np_image)
 
     # class_order = ['!', '(', ')', '+', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '=', 'A', 'C', 'M', 'N', 'S', 'T', 'X', '[', ']', 'b', 'd', 'e', 'f', 'i', 'l', 'o', 'p', 'q', 'u', 'v', 'y', 'z', '{', '}']

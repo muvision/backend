@@ -6,9 +6,7 @@ import tensorflow as tf
 # Determining Subscripts and superscripts
 
 
-def determine_special_functions(df):
-    std = np.std(df['median_y'])
-    median_mean = np.average(df['median_y'])
+def determine_special_functions(df, std, median_mean):
 
     spec_list = []
 
